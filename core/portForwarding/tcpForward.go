@@ -1,6 +1,7 @@
 package portForwarding
 
 import (
+	"HuanZhen/logger"
 	"io"
 	"log"
 	"net"
@@ -50,7 +51,8 @@ func StartTcpForward(src, dst string, timeout time.Duration) {
 			log.Fatalf("ERROR: failed to accept listener: %v", err)
 		}
 		//TODO: 在此记录恶意的IP地址
-		log.Printf("Accepted connection from %v\n", conn.RemoteAddr().String())
+		logger.HZLogger.Info("TCP转发请求",  conn.LocalAddr().String() + "<->" +conn.RemoteAddr().String())
+		//log.Printf("Accepted connection from %v\n", conn.RemoteAddr().String())
 		go handleConn(conn, tcpForwarder.dst)
 	}
 }

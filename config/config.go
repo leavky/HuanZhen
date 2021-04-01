@@ -16,6 +16,14 @@ type PortConnCheck struct {
 	Ports string `json:"ports"`
 }
 
+// 进程检测,当检测到进程恶意连接或者有恶意文件，程序做何行为
+// stopProcess  终止进程
+// shutDown     关机
+type ProcessCheck struct {
+	portChecked string `json:"port_checked"`
+	exeChecked string `json:"exe_checked"`
+}
+
 // 默认设置
 type Config struct {
 	NodeName      string        `json:"node_name"`

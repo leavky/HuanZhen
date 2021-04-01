@@ -2,6 +2,7 @@ package portConnCheck
 
 import (
 	"HuanZhen/config"
+	"HuanZhen/logger"
 	"HuanZhen/util"
 	"log"
 	"net"
@@ -35,7 +36,8 @@ func portConnCheckTcp(src string){
 			var handleConn = func(conn net.Conn) {
 				// 处理进来的连接
 				defer conn.Close()
-				log.Println("检测到远程连接", conn.LocalAddr(),conn.RemoteAddr())
+				logger.HZLogger.Info("检测到远程TCP连接：", conn.LocalAddr().String() + "<->" +conn.RemoteAddr().String())
+
 			}
 		conn, err := listener.Accept()
 		if err != nil{

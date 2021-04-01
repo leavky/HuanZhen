@@ -18,9 +18,10 @@ func init() {
 func InitLogger() {
 	writeSyncer := getLogWriter()
 	encoder := getEncoder()
-	core := zapcore.NewCore(encoder, writeSyncer, zapcore.DebugLevel)
-
-	logger := zap.New(core, zap.AddCaller())
+	//core := zapcore.NewCore(encoder, writeSyncer, zapcore.DebugLevel)
+	core := zapcore.NewCore(encoder, writeSyncer, zapcore.InfoLevel)
+	//logger := zap.New(core, zap.AddCaller())		// 不添加代码信息
+	logger := zap.New(core)
 	HZLogger = logger.Sugar()
 }
 

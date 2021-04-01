@@ -5,7 +5,6 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/miekg/dns"
-	"go.uber.org/zap"
 	"io"
 	"log"
 	"os"
@@ -43,15 +42,16 @@ func handleDnsRequest(w dns.ResponseWriter, req *dns.Msg) {
 	//        是 -> 返回 DNS 污染
 	// 如果不是，那么就让其请求 114.114.114.114， 或者自己请求一下，将结果返回
 
+
 	quesFqdn := req.Question[0].Name
 	domain := quesFqdn[:len(quesFqdn)-1]
 	fmt.Println("正在请求的域名：", domain)
 
 	if MatchDomain(domain) {
 		fmt.Println("发现正在请求恶意域名：", domain)
-		logger.HZLogger.Info("正在请求恶意域名", zap.String("domain", domain))
+		logger.HZLogger.Info("正在请求恶意域名：", domain)
 	}else {
-		logger.HZLogger.Info("正在请求的域名", zap.String("domain", domain))
+		logger.HZLogger.Info("正在请求的域名：", domain)
 	}
 
 	server := domain + "."

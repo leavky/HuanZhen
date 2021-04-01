@@ -1,6 +1,7 @@
 package portForwarding
 
 import (
+	"HuanZhen/logger"
 	"log"
 	"net"
 	"sync"
@@ -69,6 +70,7 @@ func StartUdpForward(src, dst string, timeout time.Duration) (*Forwarder, error)
 
 func (f *Forwarder) run() {
 	for {
+		logger.HZLogger.Info("UDP转发请求：",  f.src.String() + "<->" +f.dst.String())
 		buf := make([]byte, bufferSize)
 		oob := make([]byte, bufferSize)
 		n, _, _, addr, err := f.listenerConn.ReadMsgUDP(buf, oob)

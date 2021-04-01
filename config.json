@@ -6,7 +6,7 @@
         "default_ip": "127.0.0.1"
     },
     "port_conn_check": {
-        "ports": "9999,8000-8001"
+        "ports": "9999,8001"
     },
     "port_forward": [{
         "listen": "82,89,82,80-81",
