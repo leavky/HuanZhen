@@ -3,6 +3,7 @@ module HuanZhen
 go 1.16
 
 require (
+	fyne.io/fyne/v2 v2.0.2
 	github.com/google/gopacket v1.1.19
 	github.com/miekg/dns v1.1.41
 	github.com/natefinch/lumberjack v2.0.0+incompatible
