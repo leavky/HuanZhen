@@ -31,7 +31,7 @@ func welcomeScreen(_ fyne.Window) fyne.CanvasObject {
 		widget.NewLabelWithStyle("HuanZhen", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		logo,
 		container.NewHBox(
-			widget.NewLabel("本软件参考 T-pot 思路而写，主要功能为 DNS 代理检测，端口转发，远程连接地址扫描比对"),
+			widget.NewLabel("本软件参考 Tzz-pot 思路而写，主要功能为 DNS 代理检测，端口转发，远程连接地址扫描比对"),
 		),
 	))
 }

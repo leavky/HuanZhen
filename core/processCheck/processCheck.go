@@ -68,8 +68,7 @@ func checkProcess(){
 			for _, connItem := range processConnections{
 				remoteIp := connItem.Raddr.IP
 				if MatchBlackIp(remoteIp){
-					logger.HZLogger.Info("检测到有进程连接恶意IP", processPid, "--", processExe)
-					log.Println("检测到有进程连接恶意IP: ", processPid, "--",processExe)
+					logger.HZLogger.Warn("检测到有进程连接恶意IP", processPid, "--", processExe)
 				}
 			}
 			// check process exe md5

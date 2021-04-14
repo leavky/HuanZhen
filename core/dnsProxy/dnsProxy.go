@@ -48,8 +48,7 @@ func handleDnsRequest(w dns.ResponseWriter, req *dns.Msg) {
 	fmt.Println("正在请求的域名：", domain)
 
 	if MatchDomain(domain) {
-		fmt.Println("发现正在请求恶意域名：", domain)
-		logger.HZLogger.Info("正在请求恶意域名：", domain)
+		logger.HZLogger.Warn("正在请求恶意域名", domain)
 	}else {
 		logger.HZLogger.Info("正在请求的域名：", domain)
 	}

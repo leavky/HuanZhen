@@ -6,6 +6,7 @@ import (
 	"HuanZhen/core/portConnCheck"
 	"HuanZhen/core/portForwarding"
 	"HuanZhen/core/processCheck"
+	"HuanZhen/myThemes"
 	"HuanZhen/pages"
 	"encoding/json"
 	"fyne.io/fyne/v2"
@@ -59,14 +60,14 @@ func main() {
 	log.Println("@===============⚡幻阵⚡====================@\n ===========虚实之间，防护溯源。=================")
 
 	a := app.NewWithID("huanzhen")
-	//a.Settings().SetTheme(&myThemes.MyTheme{})
+	a.Settings().SetTheme(&myThemes.MyTheme{})  // 不自定义中文会乱码
 	w := a.NewWindow("幻阵")
 	topWindow = w
 
 	content := container.NewMax()
 	title := widget.NewLabel("Component name")
-	intro := widget.NewLabel("An introduction would probably go\nhere, as well as a")
-	intro.Wrapping = fyne.TextWrapWord
+	//intro := widget.NewLabel("An introduction would probably go\nhere, as well as a")
+	//intro.Wrapping = fyne.TextWrapWord
 
 	setTutorial := func(page pages.Page) {
 		if fyne.CurrentDevice().IsMobile() {
@@ -81,14 +82,13 @@ func main() {
 		}
 
 		title.SetText(page.Title)
-		intro.SetText(page.Intro)
+		//intro.SetText(page.Intro)
 
 		content.Objects = []fyne.CanvasObject{page.View(w)}
 		content.Refresh()
 	}
 
-	tutorial := container.NewBorder(
-		container.NewVBox(title, widget.NewSeparator(), intro), nil, nil, nil, content)
+	tutorial := container.NewBorder(container.NewVBox(title, widget.NewSeparator()), nil, nil, nil, content)
 	if fyne.CurrentDevice().IsMobile() {
 		w.SetContent(makeNav(setTutorial, false))
 	} else {
