@@ -3,14 +3,13 @@ package main
 import (
 	"HuanZhen/config"
 	"HuanZhen/core/dnsProxy"
+	"HuanZhen/core/pcapCheck"
 	"HuanZhen/core/portConnCheck"
 	"HuanZhen/core/portForwarding"
 	"HuanZhen/core/processCheck"
-	"HuanZhen/myThemes"
 	"HuanZhen/pages"
 	"encoding/json"
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 	"io/ioutil"
@@ -49,7 +48,7 @@ func init() {
 	go processCheck.StartProcessCheck()
 
 	// 启动数据包检测
-	//go pcapCheck.StartCheckPcap()
+	go pcapCheck.StartCheckPcap()
 
 }
 
@@ -59,43 +58,43 @@ const preferenceCurrentTutorial = "currentTutorial"
 func main() {
 	log.Println("@===============⚡幻阵⚡====================@\n ===========虚实之间，防护溯源。=================")
 
-	a := app.NewWithID("huanzhen")
-	a.Settings().SetTheme(&myThemes.MyTheme{})  // 不自定义中文会乱码
-	w := a.NewWindow("幻阵")
-	topWindow = w
-
-	content := container.NewMax()
-	title := widget.NewLabel("Component name")
-	//intro := widget.NewLabel("An introduction would probably go\nhere, as well as a")
-	//intro.Wrapping = fyne.TextWrapWord
-
-	setTutorial := func(page pages.Page) {
-		if fyne.CurrentDevice().IsMobile() {
-			child := a.NewWindow(page.Title)
-			topWindow = child
-			child.SetContent(page.View(topWindow))
-			child.Show()
-			child.SetOnClosed(func() {
-				topWindow = w
-			})
-			return
-		}
-
-		title.SetText(page.Title)
-		//intro.SetText(page.Intro)
-
-		content.Objects = []fyne.CanvasObject{page.View(w)}
-		content.Refresh()
-	}
-
-	tutorial := container.NewBorder(container.NewVBox(title, widget.NewSeparator()), nil, nil, nil, content)
-	if fyne.CurrentDevice().IsMobile() {
-		w.SetContent(makeNav(setTutorial, false))
-	} else {
-		split := container.NewHSplit(makeNav(setTutorial, true), tutorial)
-		split.Offset = 0.2
-		w.SetContent(split)
-	}
+	//a := app.NewWithID("huanzhen")
+	//a.Settings().SetTheme(&myThemes.MyTheme{})  // 不自定义中文会乱码
+	//w := a.NewWindow("幻阵")
+	//topWindow = w
+	//
+	//content := container.NewMax()
+	//title := widget.NewLabel("Component name")
+	////intro := widget.NewLabel("An introduction would probably go\nhere, as well as a")
+	////intro.Wrapping = fyne.TextWrapWord
+	//
+	//setTutorial := func(page pages.Page) {
+	//	if fyne.CurrentDevice().IsMobile() {
+	//		child := a.NewWindow(page.Title)
+	//		topWindow = child
+	//		child.SetContent(page.View(topWindow))
+	//		child.Show()
+	//		child.SetOnClosed(func() {
+	//			topWindow = w
+	//		})
+	//		return
+	//	}
+	//
+	//	title.SetText(page.Title)
+	//	//intro.SetText(page.Intro)
+	//
+	//	content.Objects = []fyne.CanvasObject{page.View(w)}
+	//	content.Refresh()
+	//}
+	//
+	//tutorial := container.NewBorder(container.NewVBox(title, widget.NewSeparator()), nil, nil, nil, content)
+	//if fyne.CurrentDevice().IsMobile() {
+	//	w.SetContent(makeNav(setTutorial, false))
+	//} else {
+	//	split := container.NewHSplit(makeNav(setTutorial, true), tutorial)
+	//	split.Offset = 0.2
+	//	w.SetContent(split)
+	//}
 
 
 
@@ -106,8 +105,8 @@ func main() {
 	//		hello.SetText("Welcome :)")
 	//	}),
 	//))
-	w.Resize(fyne.NewSize(640, 460))
-	w.ShowAndRun()
+	//w.Resize(fyne.NewSize(640, 460))
+	//w.ShowAndRun()
 
 
 
